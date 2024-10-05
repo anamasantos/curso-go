@@ -9,7 +9,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	internalmock "emailn/internal/test/mock"
+	internalmock "emailn/internal/test/internal-mock"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
