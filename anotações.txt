@@ -1,0 +1,2 @@
+comando docker postgress
+sudo docker run --name postgres -e POSTGRES_PASSWORD=123456 -e POSTGRES_USER=anamarina -p 5432:5432 -d postgres

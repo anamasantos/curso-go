@@ -1,0 +1,18 @@
+POST http://localhost:3000/campaigns
+
+{
+    "name": "criarMultiploEmails2",
+    "content": "createEmaailsteste",
+    "emails": ["anamarina@testenovo.com.br","anamar@testemail.com.br","anamarina@testnew.com.br"]
+}
+
+###
+
+GET  http://localhost:3000/campaigns/cs0q1nqiidqisk22cab0
+
+####
+PATCH http://localhost:3000/campaigns/cancel/cs0q1nqiidqisk22cab0
+
+
+####
+DELETE  http://localhost:3000/campaigns/delete/cs0q8rqiidqkn2f97b10
