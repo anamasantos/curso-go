@@ -1,5 +1,11 @@
-POST http://localhost:3000/campaigns
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhVllTdVNIc2EyZnRRdW9Jb0YxV1FXazlrSHpqS05GUEhuTVJ2ZWZUeDhJIn0.eyJleHAiOjE3Mjg3NjI4NDYsImlhdCI6MTcyODc2MjU0NiwianRpIjoiMTkyZGY3NzktMTUxYy00ZTJmLTkwMjMtZDBiOGI2NTNhY2VhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9wcm92aWRlciIsImF1ZCI6ImVtYWlsbiIsInN1YiI6IjQ4OWZkOWFkLWM1NjctNDlhMS05YTkxLTAyZWFkYjUyOWZlZCIsInR5cCI6IkJlYXJlciIsImF6cCI6ImVtYWlsbiIsInNlc3Npb25fc3RhdGUiOiI1MTYwNWE5Yy0xZTVmLTQxZDctOTI4Ny1hZmVjNzAyZTdiMWMiLCJzY29wZSI6IiIsInNpZCI6IjUxNjA1YTljLTFlNWYtNDFkNy05Mjg3LWFmZWM3MDJlN2IxYyJ9.KEaKrVaEt0TaMAZZSMccXX5i2K_f5tduQQG2Mryz-_rSKORKIxF9LPKAZVXRuIcZkPohhxcB3VopTNPpYkqG36qX2uuaci4dn9lofvhEjcgVHcj_13LWvISDvh0HwDSi1Kzl9YKOnSyWbAZ0i53GlaaW7A5kWmibGIoSUJHUu1eGHigj7o8_nYMEgcU125JczbYw-QlTPNut5ARQCF0BrpkGd_oOHW9qZ3KFjO8HFGyrvmstTwdyOX8xZqTw1fqApLP4n_Dqd92bQlxBGy2KWBQC1gzOl31Lr8HUMMLyyczrs3bVeJznm9biXssH70NSyhZUUN3Pp0BJiU_8zVe7WQ
+@url=http://localhost:3000
+@identify_provider=http://localhost:8080
+
+###
+
+
+POST {{url}}/campaigns
+Authorization: Bearer {{access_token}}
 
 {
     "name": "criarMultiploEmails23",
@@ -9,23 +15,24 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhVllTdV
 
 ###
 
-GET  http://localhost:3000/campaigns/cs0q1nqiidqisk22cab0
+GET  {{url}}/campaigns/cs5ddiiiidqloih26rb0
+Authorization: Bearer {{access_token}}
 
 ####
-PATCH http://localhost:3000/campaigns/cancel/cs0q1nqiidqisk22cab0
+PATCH {{url}}/campaigns/cancel/cs5ddiiiidqloih26rb0
+Authorization: Bearer {{access_token}}
 
 
 ####
-DELETE  http://localhost:3000/campaigns/delete/cs0q8rqiidqkn2f97b10
+DELETE  {{url}}/campaigns/delete/cs5ddiiiidqloih26rb0
+Authorization: Bearer {{access_token}}
 
-####
-POST http://localhost:8080/realms/provider/protocol/openid-connect/token
+###
+# @name token 
+POST {{identify_provider}}/realms/provider/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
 client_id=emailn&username=anamasantos&password=123456&grant_type=password
 
-####
-POST http://localhost:8080/realms/provider/protocol/openid-connect/token
-Content-Type: application/x-www-form-urlencoded 
-
-client_id=emailn&username=anamasantos&password=123456&grant_type=password
+###
+@access_token={{token.response.body.access_token}}
