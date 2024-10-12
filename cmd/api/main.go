@@ -19,6 +19,7 @@ func main() {
 	r.Use(middleware.RealIP)
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
+	r.Use(endpoints.Auth)
 
 	db := database.NewDb()
 	campaignService := campaign.ServiceImp{
