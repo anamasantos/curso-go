@@ -16,9 +16,10 @@ import (
 
 var (
 	newCampaign = contract.NewCampaign{
-		Name:    "Test Y",
-		Content: "body HI!",
-		Emails:  []string{"teste1@test.com"},
+		Name:      "Test Y",
+		Content:   "body HI!",
+		Emails:    []string{"teste1@test.com"},
+		CreatedBy: "teste@test.com.br",
 	}
 	service = campaign.ServiceImp{}
 )
@@ -78,7 +79,7 @@ func Test_Create_ValidateRepositorySave(t *testing.T) {
 
 func Test_GetById_returnCampaign(t *testing.T) {
 	assert := assert.New(t)
-	campaign, _ := campaign.NewCampaign(newCampaign.Name, newCampaign.Content, newCampaign.Emails, "")
+	campaign, _ := campaign.NewCampaign(newCampaign.Name, newCampaign.Content, newCampaign.Emails, newCampaign.CreatedBy)
 	repositoryMock := new(internalmock.CampaignRepositoryMock)
 	repositoryMock.On("GetBy", mock.MatchedBy(func(id string) bool {
 		return id == campaign.ID
@@ -90,12 +91,13 @@ func Test_GetById_returnCampaign(t *testing.T) {
 	assert.Equal(campaign.Name, campaignReturned.Name)
 	assert.Equal(campaign.Status, campaignReturned.Status)
 	assert.Equal(campaign.Content, campaignReturned.Content)
+	assert.Equal(campaign.CreatedBy, campaignReturned.CreatedBy)
 
 }
 
 func Test_GetById_returnErrorWhenSomethingWrongExist(t *testing.T) {
 	assert := assert.New(t)
-	campaign, _ := campaign.NewCampaign(newCampaign.Name, newCampaign.Content, newCampaign.Emails, "")
+	campaign, _ := campaign.NewCampaign(newCampaign.Name, newCampaign.Content, newCampaign.Emails, newCampaign.CreatedBy)
 	repositoryMock := new(internalmock.CampaignRepositoryMock)
 	repositoryMock.On("GetBy", mock.Anything).Return(nil, errors.New("Something wrong"))
 	service.Repository = repositoryMock
@@ -129,7 +131,7 @@ func Test_Delete_returnStatusInvalid_when_campaign_has_status_not_equals_pending
 
 func Test_Delete_returnInternalError_when_delete_has_problem(t *testing.T) {
 	assert := assert.New(t)
-	campaignFound, _ := campaign.NewCampaign("test 1", "Body !!", []string{"emai1@gmail.com"}, "")
+	campaignFound, _ := campaign.NewCampaign("test 1", "Body !!", []string{"emai1@gmail.com"}, newCampaign.CreatedBy)
 	repositoryMock := new(internalmock.CampaignRepositoryMock)
 	repositoryMock.On("GetBy", mock.Anything).Return(campaignFound, nil)
 	repositoryMock.On("Delete", mock.MatchedBy(func(campaign *campaign.Campaign) bool {
@@ -143,7 +145,7 @@ func Test_Delete_returnInternalError_when_delete_has_problem(t *testing.T) {
 
 func Test_Delete_returnINil_when_delete_has_success(t *testing.T) {
 	assert := assert.New(t)
-	campaignFound, _ := campaign.NewCampaign("test 1", "Body !!", []string{"emai1@gmail.com"}, "")
+	campaignFound, _ := campaign.NewCampaign("test 1", "Body !!", []string{"emai1@gmail.com"}, newCampaign.CreatedBy)
 	repositoryMock := new(internalmock.CampaignRepositoryMock)
 	repositoryMock.On("GetBy", mock.Anything).Return(campaignFound, nil)
 	repositoryMock.On("Delete", mock.MatchedBy(func(campaign *campaign.Campaign) bool {
