@@ -1,2 +1,2 @@
 gitgitgit./*.gz
-.env
+cmd/api/.env
