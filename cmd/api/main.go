@@ -4,7 +4,6 @@ import (
 	"emailn/internal/domain/campaign"
 	"emailn/internal/endpoints"
 	"emailn/internal/infrastructure/database"
-	"emailn/internal/infrastructure/mail"
 	"log"
 	"net/http"
 
@@ -15,16 +14,10 @@ import (
 
 func main() {
 
-	err := godotenv.Load("../../.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
-	errMail := mail.SendMail()
-	if errMail != nil {
-		log.Fatal("Error sending email", errMail.Error())
-	}
-	return
 
 	// GET
 	//cria a rota, para passar parametos usamos {}
