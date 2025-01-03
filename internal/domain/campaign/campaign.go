@@ -2,7 +2,6 @@ package campaign
 
 import (
 	internalerrors "emailn/internal/internal-errors"
-	"fmt"
 	"time"
 
 	"github.com/rs/xid"
@@ -60,7 +59,7 @@ func NewCampaign(name string, content string, emails []string, createdBy string)
 		Status:    Peding,
 		CreatedBy: createdBy,
 	}
-	fmt.Print(campaign)
+	// fmt.Print(campaign)
 	err := internalerrors.ValidateStruct(campaign)
 	if err == nil {
 		return campaign, err
