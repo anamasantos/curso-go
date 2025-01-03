@@ -2,31 +2,34 @@
 @identify_provider=http://localhost:8080
 
 ###
-
-
+# @name campaign_create
 POST {{url}}/campaigns
 Authorization: Bearer {{access_token}}
 
 {
     "name": "criarMultiploEmails23",
     "content": "createEmaailsteste",
-    "emails": ["anamarina@testenovo.com.br","anamar@testemail.com.br","anamarina@testnew.com.br"]
+    "emails": ["asantosgo24@gmail.com","anamar@testemail.com.br","anamarina@testnew.com.br"]
 }
-
+###
+@campaign_id={{campaign_create.response.body.id}}
 ###
 
-GET  {{url}}/campaigns/cs5ddiiiidqloih26rb0
+GET  {{url}}/campaigns/{{campaign_id}}
 Authorization: Bearer {{access_token}}
 
 ####
-PATCH {{url}}/campaigns/cancel/cs5ddiiiidqloih26rb0
+PATCH {{url}}/campaigns/cancel/{{campaign_id}}
 Authorization: Bearer {{access_token}}
 
 
 ####
-DELETE  {{url}}/campaigns/delete/cs5ddiiiidqloih26rb0
+DELETE  {{url}}/campaigns/delete/{{campaign_id}}
 Authorization: Bearer {{access_token}}
 
+####
+PATCH   {{url}}/campaigns/start/{{campaign_id}}
+Authorization: Bearer {{access_token}}
 ###
 # @name token 
 POST {{identify_provider}}/realms/provider/protocol/openid-connect/token
